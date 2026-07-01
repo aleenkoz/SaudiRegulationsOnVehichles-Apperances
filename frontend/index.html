@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle Appearance Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .dark-mode {
+            background: #1e1e1e;
+            color: #e6e6e6;
+        }
+
+        header {
+            background: #0078d4;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .upload-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .dark-mode .upload-section {
+            background: #2b2b2b;
+        }
+
+        #preview {
+            width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+
+        #loading {
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #0078d4;
+        }
+
+        .summary-card {
+            display: none;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 5px solid #0078d4;
+            margin-top: 25px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .dark-mode .summary-card {
+            background: #2b2b2b;
+            border-left-color: #4aa3ff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .summary-section {
+            margin-bottom: 20px;
+        }
+
+        .summary-section h3 {
+            margin-bottom: 8px;
+            color: #0078d4;
+        }
+
+        .dark-mode .summary-section h3 {
+            color: #4aa3ff;
+        }
+
+        .btn {
+            background: #0078d4;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background: #005ea6;
+        }
+
+        .toggle-btn {
+            float: right;
+            background: #444;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            margin-top: -50px;
+            margin-right: 20px;
+        }
+
+        .dark-mode .toggle-btn {
+            background: #888;
+        }
+
+        .pdf-btn {
+            background: #28a745;
+        }
+
+        .pdf-btn:hover {
+            background: #1e7e34;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    Vehicle Appearance Analyzer
+</header>
+
+<div class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</div>
+
+<div class="container">
+
+    <!-- Upload Section -->
+    <div class="upload-section">
+        <h2>Upload Vehicle Image</h2>
+        <input type="file" id="imageInput" accept="image/*">
+        <img id="preview" style="display:none;">
+        <button class="btn" onclick="analyzeImage()">Analyze Vehicle</button>
+        <div id="loading">Analyzing image... please wait</div>
+    </div>
+
+    <!-- Summary Section -->
+    <div id="summary-card" class="summary-card">
+        <h2>Analysis Summary</h2>
+
+        <div class="summary-section">
+            <h3>Image Type</h3>
+            <p id="summary-image-type"></p>
+        </div>
+
+        <div class="summary-section">
+            <h3>Vehicle Information</h3>
+            <p id="summary-vehicle"></p>
+        </div>
+
+        <div class="summary-section">
+            <h3>Environment</h3>
+            <p id="summary-environment"></p>
+        </div>
+
+        <div class="summary-section">
+            <h3>Main Findings</h3>
+            <ul id="summary-findings"></ul>
+        </div>
+
+        <div class="summary-section">
+            <h3>Confidence & Uncertainty</h3>
+            <p id="summary-confidence"></p>
+            <p id="summary-uncertainty"></p>
+        </div>
+
+        <div class="summary-section">
+            <h3>Recommended Actions</h3>
+            <ul id="summary-actions"></ul>
+        </div>
+
+        <button class="btn pdf-btn" onclick="downloadPDF()">Download PDF</button>
+    </div>
+
+</div>
+
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+    }
+
+    document.getElementById("imageInput").addEventListener("change", function() {
+        const file = this.files[0];
+        if (file) {
+            const preview = document.getElementById("preview");
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = "block";
+        }
+    });
+
+    async function analyzeImage() {
+        const fileInput = document.getElementById("imageInput");
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert("Please upload an image first.");
+            return;
+        }
+
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("summary-card").style.display = "none";
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const response = await fetch("http://127.0.0.1:8000/analyze-image", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+            const summary = result.analysis;
+
+            document.getElementById("loading").style.display = "none";
+
+            // Fill summary fields
+            document.getElementById("summary-image-type").textContent = summary.image_type;
+
+            const vehicle = summary.objects_detected.vehicle;
+            document.getElementById("summary-vehicle").textContent =
+                `${vehicle.color} ${vehicle.type}, modifications: ${vehicle.modifications.join(", ") || "None"}`;
+
+            document.getElementById("summary-environment").textContent =
+                summary.objects_detected.environment;
+
+            const findingsList = document.getElementById("summary-findings");
+            findingsList.innerHTML = "";
+            summary.main_findings.forEach(f => {
+                const li = document.createElement("li");
+                li.textContent = f;
+                findingsList.appendChild(li);
+            });
+
+            document.getElementById("summary-confidence").textContent =
+                "Confidence: " + summary.confidence_level;
+
+            document.getElementById("summary-uncertainty").textContent =
+                "Uncertainty: " + summary.uncertainty;
+
+            const actionsList = document.getElementById("summary-actions");
+            actionsList.innerHTML = "";
+            summary.recommended_actions.forEach(a => {
+                const li = document.createElement("li");
+                li.textContent = a;
+                actionsList.appendChild(li);
+            });
+
+            document.getElementById("summary-card").style.display = "block";
+
+        } catch (error) {
+            document.getElementById("loading").style.display = "none";
+            alert("Error analyzing image.");
+            console.error(error);
+        }
+    }
+
+    function downloadPDF() {
+        alert("PDF export will be added later.");
+    }
+</script>
+
+</body>
+</html>
