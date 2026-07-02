@@ -16,6 +16,19 @@ the regukations on vehicles' appearnces as defined by SASO (Saudi Standards, Met
 Copilot chatbot was used in many instances to generate code, especially in generating html code for user interfaces. It was
 also used heavily to analyze code errors and finding ways to solve them. 
 
+## Workflow 
+```text 
+Image Input
+↓
+Input to llava-phi3
+↓
+Structured Output (JSON)
+↓
+Decision making 
+↓
+Summary page
+```
+
 ## 📁 Project Structure: 
 ```text
 project/
@@ -26,11 +39,15 @@ project/
 │   └── decision_maker.py
 ├── frontend/
 │   └── index.html
-├── Sample inputs/
+├── Sample_inputs/
 │   ├── car1.jpg
-|		├── car2.jpg
+|	├── car2.jpg
 │   ├── car3.jpg  
 │   └── car4.jpeg
+├── Sample_outputs/
+│   ├── SaudiRegulationsAnalyzer-output1.png
+|	├── SaudiRegulationsAnalyzer-output2.png 
+│   └── SaudiRegulationsAnalyzer-output3.png
 ├── main.py
 └── requirements.txt
 ```
