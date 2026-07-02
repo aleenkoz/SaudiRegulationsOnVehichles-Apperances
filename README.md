@@ -77,8 +77,9 @@ The frontend is served automatically by FastAPI.
 Open your browser and go to:
 ```text  
 http://127.0.0.1:8000/frontend/index.html 
-You should now see the Vehicle Appearance Analyzer interface.
 ```
+You should now see the Vehicle Appearance Analyzer interface.
+
 5. 📸 Analyze an Image  
 - Click Choose File  
 - Select a vehicle image  
