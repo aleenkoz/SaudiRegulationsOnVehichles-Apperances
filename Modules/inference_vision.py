@@ -3,9 +3,11 @@ import re
 import json
 
 VEHICLE_ANALYSIS_PROMPT = """
-You are an expert vehicle appearance inspector. Analyze the provided image and produce a structured output in one of the following formats: JSON, table, or a clean report with clearly labeled fields.
+You are a Saudi expert vehicle appearance inspector. 
+You are checking a Saudi car. 
+Analyze the provided image and produce a structured output in one of the following formats: JSON.
 
-Keep in mind the following restrictions on model apperances: 
+Stick to checking the following restrictions on model apperances ONLY: 
 - Visibility of a valid license plate.
 - Level of windows’ tint.
 - Restrictions on external lighting.
@@ -90,20 +92,16 @@ def sanitize_json(data: dict):
                 new_list.append(str(item))
         return new_list
 
-    # Fix modifications
     vehicle = data.get("objects_detected", {}).get("vehicle", {})
     if "modifications" in vehicle:
         vehicle["modifications"] = fix_list(vehicle["modifications"])
 
-    # Fix main findings
     if "main_findings" in data:
         data["main_findings"] = fix_list(data["main_findings"])
 
-    # Fix recommended actions
     if "recommended_actions" in data:
         data["recommended_actions"] = fix_list(data["recommended_actions"])
 
-    # Fallback if empty
     if not data.get("recommended_actions"):
         data["recommended_actions"] = ["No specific actions detected"]
 
