@@ -151,9 +151,9 @@ folder.
 
 #### Sample output (run):
 
-![Input interface]("Sample_outputs/SaudiRegulationsAnalyzer-output3.png")
-![Sample Output 1]("Sample_outputs/SaudiRegulationsAnalyzer-output1.png")
-![Sample Output 2]("Sample_outputs/SaudiRegulationsAnalyzer-output2.png")
+![Input interface](Sample_outputs/SaudiRegulationsAnalyzer-output3.png)
+![Sample Output 1](Sample_outputs/SaudiRegulationsAnalyzer-output1.png)
+![Sample Output 2](Sample_outputs/SaudiRegulationsAnalyzer-output2.png)
 
 
 #### Insights gained: 
