@@ -177,3 +177,6 @@ folder.
 This experiment showed how to correctly implemnt and use VLM in applications. Also showed me how heavy is the importance
 of the prompt structure and wording. It for sure gave me the freedom of creativity which I enjoy very much. 
 One other important thing it showed me is that how different VLMs behave and how deffirent their requirements are. 
+
+#### Future improvement: 
+Implementin the download PDF function. 
