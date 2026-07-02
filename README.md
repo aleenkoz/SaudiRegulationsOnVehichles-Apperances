@@ -144,13 +144,17 @@ The system will:
 #### Sample inputs (images that have been used):
 Please find the images used for analysis and testing in:
 ```text 
-\Sample input
+\Sample_inputs
 ``` 
 folder. 
 
 
 #### Sample output (run):
-![Test](Sample outputs/SaudiRegulationsAnalyzer-output1.png)
+
+![Input interface]("Sample_outputs/SaudiRegulationsAnalyzer-output3.png")
+![Sample Output 1]("Sample_outputs/SaudiRegulationsAnalyzer-output1.png")
+![Sample Output 2]("Sample_outputs/SaudiRegulationsAnalyzer-output2.png")
+
 
 #### Insights gained: 
 This experiment showed how to correctly implemnt and use VLM in applications. Also showed me how heavy is the importance
