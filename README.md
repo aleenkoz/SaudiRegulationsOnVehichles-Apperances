@@ -18,7 +18,7 @@ also used heavily to analyze code errors and finding ways to solve them.
 
 ## 📁 Project Structure: 
 ```text
-project/
+\\project/
 │
 ├── Modules/
 │   ├── input_acceptance.py
@@ -28,7 +28,7 @@ project/
 │   └── index.html
 ├── main.py
 └── requirements.txt
-
+\\
 
 ## ⚙️ How it works: 
 
