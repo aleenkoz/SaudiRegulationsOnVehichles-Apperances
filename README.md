@@ -10,23 +10,25 @@ the regukations on vehicles' appearnces as defined by SASO (Saudi Standards, Met
 - 🖥️ Display the summary in a simple and appealing user interface. 
 
 ## 🤖 AI Usage: 
-- 🖼️ Image Analysis: 
+- 🖼️ Image Analysis:  
 llava-phi3 was used to analyze an image of a car and copare it with Saudi regulations on vehichles' appearances. 
-- 💻 Code Generation: 
+- 💻 Code Generation:  
 Copilot chatbot was used in many instances to generate code, especially in generating html code for user interfaces. It was
 also used heavily to analyze code errors and finding ways to solve them. 
 
 ## 📁 Project Structure: 
-\project/
+```text
+project/
 │
 ├── Modules/
 │   ├── input_acceptance.py
 │   ├── vision_inference.py   
 │   └── decision_maker.py
 ├── frontend
-│   └──  index.html
+│   └── index.html
 ├── main.py
-└── requirements.txt\
+└── requirements.txt
+
 
 ## ⚙️ How it works: 
 
@@ -55,21 +57,25 @@ Ollama installed on your machine
 (Download from: https://ollama.com)
 
 Then install Python dependencies:  
-\pip install -r requirements.txt\ 
+```text
+pip install -r requirements.txt
 
 2. 📥 Pull the LLaVA‑Phi3 Model  
 The backend uses LLaVA‑Phi3 for image analysis. Pull it once:  
-\ollama pull llava-phi3\  
+```text
+ollama pull llava-phi3
 This may take a few minutes depending on your connection
 
 3. ▶️ Start the Backend Server  
 Run FastAPI using Uvicorn:  
-\uvicorn main:app --reload\
+```text
+uvicorn main:app --reload
 
 4. 🌐 Open the Frontend  
 The frontend is served automatically by FastAPI.  
-Open your browser and go to:  
-\ http://127.0.0.1:8000/frontend/index.html \  
+Open your browser and go to:
+```text  
+http://127.0.0.1:8000/frontend/index.html 
 You should now see the Vehicle Appearance Analyzer interface.
 
 5. 📸 Analyze an Image  
