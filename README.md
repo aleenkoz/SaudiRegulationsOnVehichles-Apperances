@@ -18,7 +18,7 @@ also used heavily to analyze code errors and finding ways to solve them.
 
 ## 📁 Project Structure: 
 ```text
-\\project/
+project/
 │
 ├── Modules/
 │   ├── input_acceptance.py
@@ -28,7 +28,7 @@ also used heavily to analyze code errors and finding ways to solve them.
 │   └── index.html
 ├── main.py
 └── requirements.txt
-\\
+```
 
 ## ⚙️ How it works: 
 
@@ -59,25 +59,26 @@ Ollama installed on your machine
 Then install Python dependencies:  
 ```text
 pip install -r requirements.txt
-
+```
 2. 📥 Pull the LLaVA‑Phi3 Model  
 The backend uses LLaVA‑Phi3 for image analysis. Pull it once:  
 ```text
 ollama pull llava-phi3
+```
 This may take a few minutes depending on your connection
 
 3. ▶️ Start the Backend Server  
 Run FastAPI using Uvicorn:  
 ```text
 uvicorn main:app --reload
-
+```
 4. 🌐 Open the Frontend  
 The frontend is served automatically by FastAPI.  
 Open your browser and go to:
 ```text  
 http://127.0.0.1:8000/frontend/index.html 
 You should now see the Vehicle Appearance Analyzer interface.
-
+```
 5. 📸 Analyze an Image  
 - Click Choose File  
 - Select a vehicle image  
