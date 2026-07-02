@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+pillow
+ollama
+PIL
+io 
+base64
+re
+json
