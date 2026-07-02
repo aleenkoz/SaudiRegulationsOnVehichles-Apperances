@@ -148,10 +148,13 @@ Please find the images used for analysis and testing in:
 ``` 
 folder. 
 
+
 #### Sample output (run):
-![Input interface](Sample outputs\SaudiRegulationsAnalyzer-output3.png)
-![Sample Output 1](Sample outputs\SaudiRegulationsAnalyzer-output1.png)
-![Sample Output 2](Sample outputs\SaudiRegulationsAnalyzer-output2.png)
+
+![Input interface](Sample outputs/SaudiRegulationsAnalyzer-output3.png)
+![Sample Output 1](Sample outputs/SaudiRegulationsAnalyzer-output1.png)
+![Sample Output 2](Sample outputs/SaudiRegulationsAnalyzer-output2.png)
+
 
 #### Insights gained: 
 This experiment showed how to correctly implemnt and use VLM in applications. Also showed me how heavy is the importance
